@@ -33,10 +33,22 @@ export function generateMetadata(): Metadata {
     description: HOME_DESCRIPTION,
     applicationName: SITE_NAME,
     robots: { index: true, follow: true },
+    // Stable public URLs (not hashed) so Google Search / GSC can fetch the favicon.
+    // Formats: ICO + PNG ≥48px square — SVG alone is not enough for Google SERP icons.
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "48x48" },
+        { url: "/icon-48.png", type: "image/png", sizes: "48x48" },
+        { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      ],
+      shortcut: "/favicon.ico",
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    },
     openGraph: {
       siteName: SITE_NAME,
       locale: "es",
       type: "website",
+      images: [{ url: "/logo.png", width: 512, height: 512, alt: SITE_NAME }],
     },
     verification: config.googleSiteVerification
       ? { google: config.googleSiteVerification }

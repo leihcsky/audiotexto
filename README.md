@@ -19,6 +19,18 @@ npm run dev
 
 打开 http://localhost:3000 。没有 API Token 时，转录接口会返回西班牙语配置错误，不会返回假结果。
 
+## 站点图标（favicon / logo）
+
+Google 搜索结果里的站点标志依赖可抓取的方形图标（建议 ≥48×48，格式 ICO/PNG；不要只放 SVG）。本仓库约定：
+
+| 文件 | 用途 |
+|---|---|
+| `public/favicon.ico` / `app/favicon.ico` | 根路径 `/favicon.ico`，浏览器与爬虫默认查找 |
+| `public/icon-48.png`、`public/icon-192.png` | Google 推荐的方形 PNG |
+| `public/apple-touch-icon.png` | iOS / `apple-touch-icon` |
+| `public/logo.png` | 方形品牌标（Open Graph 等） |
+| `public/logo-wordmark.svg` | 横版文字 logo，非 favicon |
+
 ## 脚本
 
 | 命令 | 作用 |
@@ -41,12 +53,12 @@ npm run dev
 | `DAILY_REQUEST_LIMIT` | `3` | 每个客户端每天可发起的转录次数，按 UTC 日计算 |
 | `MAX_CONCURRENT_REQUESTS` | `1` | 每个客户端同时进行的转录数 |
 | `REPLICATE_TIMEOUT_MS` | `120000` | Replicate 请求超时 |
-| `SITE_URL` | `http://localhost:3000` | canonical 和 sitemap 使用的站点地址，不要带末尾斜杠 |
+| `SITE_URL` | `https://voztexto.org` | canonical 和 sitemap 使用的站点地址，不要带末尾斜杠；本地可改成 `http://localhost:3000` |
 | `TRUSTED_IP_HEADER` | 空 | 由反向代理覆盖写入的客户端 IP 头，例如 `x-real-ip` |
 | `TRUSTED_PROXY_COUNT` | `0` | 仅在使用 `x-forwarded-for` 时需要，填你控制的代理层数 |
 | `GA_MEASUREMENT_ID` | 空 | GA4 ID，形如 `G-XXXX`。留空则不加载统计脚本 |
 | `GOOGLE_SITE_VERIFICATION` | 空 | Search Console 的 HTML 标记校验值 |
-| `CONTACT_EMAIL` | 空 | 联系页和隐私页展示的邮箱 |
+| `CONTACT_EMAIL` | `hola@voztexto.org` | 联系页和合规页面展示的邮箱 |
 
 只有通过格式和时长校验、即将调用 API 的请求才计入每日次数。格式错误不会消耗额度。API 失败仍会计入，因为请求已经发出。
 
