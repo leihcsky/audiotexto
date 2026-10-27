@@ -24,3 +24,41 @@ body {
   outline: 2px solid var(--color-pine);
   outline-offset: 3px;
 }
+
+@keyframes use-case-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .use-case-card {
+    animation: use-case-rise 0.55s ease both;
+  }
+
+  .use-case-card:nth-child(1) {
+    animation-delay: 0.04s;
+  }
+  .use-case-card:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  .use-case-card:nth-child(3) {
+    animation-delay: 0.16s;
+  }
+  .use-case-card:nth-child(4) {
+    animation-delay: 0.22s;
+  }
+
+  .use-case-card img {
+    transition: transform 0.45s ease;
+  }
+
+  .use-case-card:hover img {
+    transform: scale(1.02);
+  }
+}

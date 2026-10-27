@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { FaqJsonLd } from "@/components/faq-json-ld";
 import { TranscribeTool } from "@/components/transcribe-tool";
@@ -93,16 +94,22 @@ export default function HomePage() {
             number="1"
             title="Sube el audio"
             text="Elige un archivo desde el móvil o la computadora, o arrástralo al recuadro."
+            imageSrc="/illustrations/paso-subir.jpg"
+            imageAlt="Ilustración de subir un archivo de audio"
           />
           <Step
             number="2"
             title="Transcribe el audio"
             text="Pulsa «Transcribir audio» y espera el resultado. Cuando termine, verás el texto en pantalla."
+            imageSrc="/illustrations/paso-transcribir.jpg"
+            imageAlt="Ilustración de convertir el audio en texto"
           />
           <Step
             number="3"
             title="Copia o descarga el texto"
             text="Revisa la transcripción, cópiala o guárdala como archivo TXT."
+            imageSrc="/illustrations/paso-exportar.jpg"
+            imageAlt="Ilustración de copiar o descargar el texto"
           />
         </div>
       </section>
@@ -116,22 +123,30 @@ export default function HomePage() {
             Sirve cuando tienes voz grabada y necesitas el contenido por escrito, sin escribirlo a
             mano.
           </p>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+          <ul className="mt-8 grid gap-5 sm:grid-cols-2">
             <UseCase
               title="Notas de voz"
               text="Pasa a texto recordatorios, ideas o mensajes de voz que guardaste en el móvil."
+              imageSrc="/illustrations/notas-de-voz.jpg"
+              imageAlt="Persona pasando una nota de voz del móvil a texto en un cuaderno"
             />
             <UseCase
               title="Entrevistas"
               text="Convierte conversaciones grabadas en texto para resumirlas, citarlas o archivarlas."
+              imageSrc="/illustrations/entrevistas.jpg"
+              imageAlt="Entrevista grabada que se convierte en un documento de texto"
             />
             <UseCase
               title="Clases y reuniones"
               text="Obtén una base escrita de lo hablado en una clase, una reunión o una presentación."
+              imageSrc="/illustrations/clases-reuniones.jpg"
+              imageAlt="Escritorio con portátil y cuaderno tras una clase o reunión"
             />
             <UseCase
               title="Podcasts y grabaciones largas"
               text="Saca el texto de un episodio o de una grabación para buscar frases y reutilizar el contenido."
+              imageSrc="/illustrations/podcasts.jpg"
+              imageAlt="Mesa de podcast con auriculares, micrófono y transcripción en el portátil"
             />
           </ul>
         </div>
@@ -176,9 +191,30 @@ export default function HomePage() {
   );
 }
 
-function Step({ number, title, text }: { number: string; title: string; text: string }) {
+function Step({
+  number,
+  title,
+  text,
+  imageSrc,
+  imageAlt,
+}: {
+  number: string;
+  title: string;
+  text: string;
+  imageSrc: string;
+  imageAlt: string;
+}) {
   return (
     <article>
+      <div className="relative mb-4 h-24 w-full max-w-[13rem] overflow-hidden rounded-2xl bg-[#ebe4d6] sm:h-28">
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          sizes="208px"
+          className="object-cover object-center"
+        />
+      </div>
       <p className="text-sm font-semibold text-pine">Paso {number}</p>
       <h3 className="mt-2 text-xl font-semibold text-ink">{title}</h3>
       <p className="mt-2 leading-7 text-muted">{text}</p>
@@ -195,11 +231,32 @@ function Benefit({ title, text }: { title: string; text: string }) {
   );
 }
 
-function UseCase({ title, text }: { title: string; text: string }) {
+function UseCase({
+  title,
+  text,
+  imageSrc,
+  imageAlt,
+}: {
+  title: string;
+  text: string;
+  imageSrc: string;
+  imageAlt: string;
+}) {
   return (
-    <li className="rounded-3xl border border-line bg-card p-5">
-      <h3 className="text-lg font-semibold text-ink">{title}</h3>
-      <p className="mt-2 leading-7 text-muted">{text}</p>
+    <li className="use-case-card overflow-hidden rounded-3xl border border-line bg-card sm:flex sm:items-stretch">
+      <div className="relative h-28 w-full shrink-0 overflow-hidden bg-[#ebe4d6] sm:h-auto sm:w-36 md:w-40">
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          sizes="(max-width: 640px) 100vw, 160px"
+          className="object-cover object-center"
+        />
+      </div>
+      <div className="p-4 sm:p-5">
+        <h3 className="text-lg font-semibold text-ink">{title}</h3>
+        <p className="mt-2 text-sm leading-6 text-muted sm:text-base sm:leading-7">{text}</p>
+      </div>
     </li>
   );
 }
